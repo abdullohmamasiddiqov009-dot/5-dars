@@ -1,56 +1,52 @@
 function getLongWords(arr) {
-  let result = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].length > 4) {
-      result.push(arr[i].toUpperCase());
-    }
-  }
+  let result = arr.filter((v) => v.length > 4).map((v) => v.toUpperCase());
   return result;
 }
-console.log(getLongWords(["apple", "cat", "banana"]));
+console.log(getLongWords(["olma", "anor", "shaftoli"]));
 
 //======================================================================
 
 function removeNumbers(arr) {
-  let result = [];
-  for (let i = 0; i < arr.length; i++) {
-    let word = arr[i];
-    let hasNum = false;
-    for (let j = 0; j < word.length; j++) {
-      if (word[j] >= "0" && word[j] <= "9") {
-        hasNum = true;
-        break;
-      }
+  let result = arr.filter((v) => {
+    let hasNum = v.split("").some((c) => c >= "0" && c <= "9");
+    if (hasNum === true) {
+      return false;
+    } else {
+      return true;
     }
-    if (hasNum === false) {
-      result.push(word);
-    }
-  }
+  });
   return result;
 }
-console.log(removeNumbers(["olma", "olma7", "anor"]));
+console.log(removeNumbers(["olma", "mashina7", "anor", "2chi"]));
 
 //==========================
 
 function getLastThree(arr) {
-  return arr.slice(-3);
+  let result = arr.slice(-3);
+  return result;
 }
 console.log(getLastThree([1, 2, 3, 4, 5]));
 
 //==========================================================
 
 function sortDescending(arr) {
-  return arr.sort().reverse();
+  let result = arr.sort((a, b) => {
+    if (a < b) {
+      return 1;
+    } else if (a > b) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+  return result;
 }
-console.log(sortDescending([1, 5, 2, 8]));
+console.log(sortDescending([5, 2, 9, 1]));
 
 //==============================================
 
 function addExclamation(arr) {
-  let result = [];
-  for (let i = 0; i < arr.length; i++) {
-    result.push(arr[i] + "!");
-  }
+  let result = arr.map((v) => v + "!");
   return result;
 }
 console.log(addExclamation(["salom", "xayr"]));
@@ -58,57 +54,52 @@ console.log(addExclamation(["salom", "xayr"]));
 //===========================================================================
 
 function findFirstShort(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].length < 3) {
-      return arr[i];
+  let result = arr.find((v) => {
+    if (v.length < 3) {
+      return true;
+    } else {
+      return false;
     }
-  }
-  return null;
+  });
+  return result;
 }
 console.log(findFirstShort(["olma", "ok", "behi"]));
 
 //======================
 
 function checkIncludes(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === "banana") {
-      return true;
-    }
+  let exists = arr.includes("banana");
+  if (exists === true) {
+    return "Bor";
+  } else {
+    return "Yo'q";
   }
-  return false;
 }
 console.log(checkIncludes(["apple", "banana"]));
 
 //====================================================
 
 function getIndexes(arr) {
-  let first = arr.indexOf("b");
-  let last = arr.lastIndexOf("b");
-  return first + " va " + last;
+  let firstIndex = arr.indexOf("b");
+  let lastIndex = arr.lastIndexOf("b");
+  return firstIndex + " va " + lastIndex;
 }
-console.log(getIndexes(["a", "b", "c", "b"]));
+console.log(getIndexes(["a", "b", "c", "b", "d"]));
 
 //==================================
 
 function addAndRemove(arr) {
   arr.unshift(0);
   arr.pop();
-  return arr;
+  let result = arr;
+  return result;
 }
-console.log(addAndRemove([1, 2, 3]));
+console.log(addAndRemove([10, 20, 30]));
 
 //===============================================================================
 
 function cleanAndJoin(arr) {
-  let res = "";
-  for (let i = 0; i < arr.length; i++) {
-    let word = arr[i].trim();
-    if (i === 0) {
-      res = word;
-    } else {
-      res = res + ", " + word;
-    }
-  }
-  return res;
+  let result = arr.map((v) => v.trim()).join(", ");
+  return result;
 }
-console.log(cleanAndJoin(["  olma", " anor  "]));
+console.log(cleanAndJoin(["  olma", " anor  ", "behi "]));
